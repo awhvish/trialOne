@@ -1,4 +1,5 @@
 import { useState } from "react";
+import axios from "axios";
 
 function Signup() {
   const [formData, setFormData] = useState({
@@ -7,19 +8,18 @@ function Signup() {
     email: "",
     password: "",
   });
+  var [flag, setFlag] = useState(false);
 
   async function onSubmit(e) {
     e.preventDefault();
     console.log(formData);
     try {
-        const response = await fetch("http://localhost:8000/api/v1/signup", {
-            method:'POST',
-            headers:{'Content-Type':'application/json'},
-            body:JSON.stringify(formData)
-        });
+        const response = await axios.post('http://localhost:8000/api/v1/signup', formData);
+        console.log('Server response:', response.data);
     }
-    catch(error) {
-        console.error("Error posting data to server", error);
+    catch(error){
+        console.error("Error posting data to server:", error.response.data.error);
+        setFlag(true);
     }
   }
   function handleChange(e) {
@@ -60,6 +60,7 @@ function Signup() {
         />
         <button type="submit">Sign Up</button>
       </form>
+      {flag && <p>Username or email already exists! </p> }
     </div>
   );
 }
