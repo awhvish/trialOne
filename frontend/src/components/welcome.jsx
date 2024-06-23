@@ -1,4 +1,5 @@
 import './css/welcome.css';
+import Navbar from './navbar';
 
 function Welcome() {
     function handleLogin() {
@@ -9,6 +10,7 @@ function Welcome() {
     }
     return (
         <>
+            <Navbar></Navbar>
             <h1>Welcome to the snake game!</h1>
             <h3>Please login to play the game</h3>
             <button className="welcome-btn" onClick={handleLogin}>Log In</button>

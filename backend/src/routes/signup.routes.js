@@ -1,19 +1,8 @@
-// Import necessary modules
 import express from "express";
-import User from "../models/user.models.js"; // Adjust the path as needed
+import User from "../models/user.models.js";
+import validateSignupInput from "../middlewares/signup.middleware.js";
 
-// Create an Express router
 const router = express.Router();
-
-// Middleware to validate signup input
-const validateSignupInput = (req, res, next) => {
-  const { fullName, username, email, password } = req.body;
-  if (!fullName || !username || !email || !password) {
-    return res.status(400).json({ error: "All fields are required" });
-  }
-  // Add more validation logic as needed
-  next();
-};
 
 // POST route for signup
 router.route("/").post(validateSignupInput, async (req, res) => {
