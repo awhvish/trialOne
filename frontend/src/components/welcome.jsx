@@ -1,0 +1,20 @@
+import './css/welcome.css';
+
+function Welcome() {
+    function handleLogin() {
+        window.location.href = '/login';
+    }
+    function handleSignup() {
+        window.location.href = '/signup';
+    }
+    return (
+        <>
+            <h1>Welcome to the snake game!</h1>
+            <h3>Please login to play the game</h3>
+            <button className="welcome-btn" onClick={handleLogin}>Log In</button>
+            <button className="welcome-btn" onClick={handleSignup}>Sign Up</button>
+        </>
+    );
+}
+
+export default Welcome;
