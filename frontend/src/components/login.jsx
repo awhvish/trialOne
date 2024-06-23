@@ -15,7 +15,7 @@ function Login() {
     console.log(formData);
     try {
         const response = await axios.post(
-          "http://localhost:8000/api/v1/login",
+          "/api/v1/login",
           formData
         );
         if (response.status === 202) {

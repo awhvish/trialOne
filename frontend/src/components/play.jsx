@@ -11,7 +11,7 @@ function Play() {
                 return;
             }
             try {
-                const response = await fetch('http://localhost:8000/api/v1/play', {
+                const response = await fetch('/api/v1/play', {
                     method: 'POST',
                     headers: {
                         'Authorization': 'Bearer ' + token,

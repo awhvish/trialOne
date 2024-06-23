@@ -17,7 +17,7 @@ function Signup() {
     console.log(formData);
     try {
       const response = await axios.post(
-        "http://localhost:8000/api/v1/signup",
+        "/api/v1/signup",
         formData
       );
       console.log("Server response:", response.data);
