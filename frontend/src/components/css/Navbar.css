@@ -31,11 +31,11 @@
     color: white;
     transition: color 0.3s ease-in-out;
   }
-  
+
   .nav-links a:hover {
     color: grey;
   }
-  
+
   /* Responsive Navbar */
   @media (max-width: 768px) {
     .nav-links {
@@ -46,3 +46,4 @@
       flex-grow: 1; /* Center logo on smaller screens */
     }
   }
+

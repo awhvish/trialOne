@@ -2,44 +2,45 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import "./css/signup.css";
 import Navbar from "./navbar";
-import { useAuth } from "./utils/authContext";
+import { useAuth } from "./utils/authContext.jsx";
 import { useNavigate } from "react-router-dom";
+import validateForm from "./utils/validateForm.jsx";
+import Footer from "./footer.jsx";
 
 function Signup() {
   const navigate = useNavigate();
   const { isAuthenticated, checkAuth } = useAuth();
-
-  useEffect(() => {
-    checkAuth();
-    if (isAuthenticated) {
-      navigate("/"); 
-    }
-  }, [isAuthenticated, navigate, checkAuth]);
-
-
+  const [caution, setCaution] = useState("");
   const [formData, setFormData] = useState({
     fullName: "",
     username: "",
     email: "",
     password: "",
   });
-  var [flag, setFlag] = useState(0);
 
-  async function onSubmit(e) {
-    e.preventDefault();
-    console.log(formData);
+  useEffect(() => {
+    checkAuth();
+    if (isAuthenticated) {
+      navigate("/");
+    }
+  }, [isAuthenticated, navigate, checkAuth]);
+
+  async function onSubmit(event) {
+    event.preventDefault();
+    const validationMessage = validateForm(formData);
+    if (validationMessage) {
+      setCaution(validationMessage);
+      return;
+    }
     try {
-      const response = await axios.post(
-        "/api/v1/signup",
-        formData
-      );
+      const response = await axios.post("/api/v1/signup", formData);
       console.log("Server response:", response.data);
-      setFlag(2);
+      setCaution((`User created! Login to continue`));
     } catch (error) {
       console.error("Error posting data to server:", error.response.data.error);
-      setFlag(1);
-    }
+      setCaution(`User created! Login to continue.`);    }
   }
+
   function handleChange(e) {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -47,50 +48,51 @@ function Signup() {
 
   return (
     <div>
-      <Navbar></Navbar>
+      <Navbar />
       <h1>Signup</h1>
-      <form onSubmit={(e) => onSubmit(e)}>
+      <form onSubmit={onSubmit}>
         <input
           type="text"
           placeholder="Enter full name"
           name="fullName"
           className="signup-txt"
-          onChange={(e) => handleChange(e)}
+          onChange={handleChange}
+          value={formData.fullName}
         />
-        <br></br>
+        <br />
         <input
           type="text"
           placeholder="Enter username"
           name="username"
           className="signup-txt"
-          onChange={(e) => handleChange(e)}
+          onChange={handleChange}
+          value={formData.username}
         />
-        <br></br>
+        <br />
         <input
-          type="text"
+          type="email"
           placeholder="Enter email"
           name="email"
           className="signup-txt"
-          onChange={(e) => handleChange(e)}
+          onChange={handleChange}
+          value={formData.email}
         />
-        <br></br>
+        <br />
         <input
-          type="text"
+          type="password"
           placeholder="Enter password"
           name="password"
           className="signup-txt"
-          onChange={(e) => handleChange(e)}
+          onChange={handleChange}
+          value={formData.password}
         />
-        <br></br>
+        <br />
         <button className="signup-btn" type="submit">
           Sign Up
         </button>
       </form>
-
-      {flag==2?<h3>User created!<br></br> 
-      <a href="/login">Login to continue</a></h3>:""}
-
-      {flag==1?<h3>Username or password already exists</h3>:""}
+      <h3>{caution}</h3>
+      <Footer></Footer>
     </div>
   );
 }

@@ -4,17 +4,18 @@ import "./css/login.css";
 import Navbar from "./navbar";
 import { useAuth } from "./utils/authContext";
 import { useNavigate } from "react-router-dom";
+import Footer from "./footer.jsx";
 
 function Login() {
-  const navigate = useNavigate(); // Renamed for clarity
+  const navigate = useNavigate();
   const { isAuthenticated, checkAuth } = useAuth();
 
   useEffect(() => {
     checkAuth();
     if (isAuthenticated) {
-      navigate("/"); // Corrected to use navigate function directly
+      navigate("/"); 
     }
-  }, [isAuthenticated, navigate, checkAuth]); // Updated dependency array
+  }, [isAuthenticated, navigate, checkAuth]); 
 
   const [formData, setFormData] = useState({
     username: "",
@@ -81,6 +82,7 @@ function Login() {
       </form>
 
       {flag && <p>Invalid username or password! </p>}
+      <Footer></Footer>
     </div>
   );
 }

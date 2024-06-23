@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "./navbar.jsx";
+import Footer from "./footer.jsx";
 
 function Play() {
     const [flag, setFlag] = useState(false);
@@ -38,6 +39,7 @@ function Play() {
             <Navbar />
             <h1>Play the game</h1>
             {flag ? <h2>Game is loading..</h2> : <h2>Please <a href="/Login">Login</a> to play</h2>}
+            <Footer></Footer>
         </div>
     );
 }

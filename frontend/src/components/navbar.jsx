@@ -40,8 +40,8 @@ function Navbar() {
           <a href="/play">Play</a>
         </li>
         {checkLogin && (
-          <li>
-            <a href="/" onClick={handleSignout}>
+          <li >
+            <a href="/" onClick={handleSignout} className="signout">
               Signout
             </a>
           </li>
