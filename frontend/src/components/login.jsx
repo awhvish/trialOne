@@ -1,9 +1,21 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import "./css/login.css";
 import Navbar from "./navbar";
+import { useAuth } from "./utils/authContext";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
+  const navigate = useNavigate(); // Renamed for clarity
+  const { isAuthenticated, checkAuth } = useAuth();
+
+  useEffect(() => {
+    checkAuth();
+    if (isAuthenticated) {
+      navigate("/"); // Corrected to use navigate function directly
+    }
+  }, [isAuthenticated, navigate, checkAuth]); // Updated dependency array
+
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -11,36 +23,30 @@ function Login() {
   var [flag, setFlag] = useState(false);
 
   async function onSubmit(e) {
-    e.preventDefault(); 
+    e.preventDefault();
     console.log(formData);
     try {
-        const response = await axios.post(
-          "/api/v1/login",
-          formData
-        );
-        if (response.status === 202) {
-          console.log("Server response:", response.data);
-          const token = response.data.token;
-          setFlag(false);
-          try {
-            localStorage.setItem("token", token);
-            window.location.href = "/play";
-            console.log("Token saved to local storage");
-          }
-          catch (error) {
-            console.error("Error saving token:", error);
-            setFlag(true);
-          }
-        }
-        else {
-          console.log("Server response:", response.data.error);
+      const response = await axios.post("/api/v1/login", formData);
+      if (response.status === 202) {
+        console.log("Server response:", response.data);
+        const token = response.data.token;
+        setFlag(false);
+        try {
+          localStorage.setItem("token", token);
+          window.location.href = "/play";
+          console.log("Token saved to local storage");
+        } catch (error) {
+          console.error("Error saving token:", error);
           setFlag(true);
         }
-      }
-    catch (error) {
-        console.error("Error posting data to server:", error.response.data.error);
+      } else {
+        console.log("Server response:", response.data.error);
         setFlag(true);
       }
+    } catch (error) {
+      console.error("Error posting data to server:", error.response.data.error);
+      setFlag(true);
+    }
   }
 
   function handleChange(e) {

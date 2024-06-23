@@ -31,9 +31,11 @@ function Navbar() {
           </li>
         )}
 
-        <li>
-          <a href="/signup">Signup</a>
-        </li>
+        {!checkLogin && (
+          <li>
+            <a href="/signup">Signup</a>
+          </li>
+        )}
         <li>
           <a href="/play">Play</a>
         </li>

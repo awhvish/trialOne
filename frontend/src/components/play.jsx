@@ -37,7 +37,7 @@ function Play() {
         <div>
             <Navbar />
             <h1>Play the game</h1>
-            {flag ? <h2>Game is loading..</h2> : <h2>Please Login to play</h2>}
+            {flag ? <h2>Game is loading..</h2> : <h2>Please <a href="/Login">Login</a> to play</h2>}
         </div>
     );
 }

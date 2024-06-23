@@ -1,9 +1,22 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import "./css/signup.css";
 import Navbar from "./navbar";
+import { useAuth } from "./utils/authContext";
+import { useNavigate } from "react-router-dom";
 
 function Signup() {
+  const navigate = useNavigate();
+  const { isAuthenticated, checkAuth } = useAuth();
+
+  useEffect(() => {
+    checkAuth();
+    if (isAuthenticated) {
+      navigate("/"); 
+    }
+  }, [isAuthenticated, navigate, checkAuth]);
+
+
   const [formData, setFormData] = useState({
     fullName: "",
     username: "",
