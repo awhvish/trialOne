@@ -33,7 +33,7 @@ function Signup() {
       return;
     }
     try {
-      const response = await axios.post("/api/v1/signup", formData,
+      const response = await axios.post("https://snakeapi.chickenkiller.com/api/v1/signup", formData,
         {
           headers: {
             'Content-Type': 'application/json',

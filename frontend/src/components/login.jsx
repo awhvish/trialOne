@@ -27,7 +27,7 @@ function Login() {
     e.preventDefault();
     console.log(formData);
     try {
-      const response = await axios.post("/api/v1/login", formData,
+      const response = await axios.post("https://snakeapi.chickenkiller.com/api/v1/login", formData,
         {
           headers: {
             'Content-Type': 'application/json',
