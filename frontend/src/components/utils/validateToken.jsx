@@ -1,6 +1,6 @@
 async function validateToken(token) {
     try {
-      const response = await axios.post('/api/v1/validateToken', { token });
+      const response = await axios.post('http://13.49.21.122:4200/api/v1/validateToken', { token });
       // Assuming the server returns a status code of 200 for a valid token
       if (response.status === 200) {
         console.log("Token is valid");
