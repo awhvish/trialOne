@@ -3,8 +3,14 @@ import cors from 'cors';
 
 const app = express();
 
-app.use(cors());
+app.use(cors({
+    origin: 'https://trial-one-three.vercel.app/', // Allow only your domain
+    methods: 'GET,POST,PUT,DELETE', // Allowed methods
+    allowedHeaders: 'Content-Type,Authorization' // Allowed headers
+  }));
 app.use(express.json());
+
+
 
 //routes
 import signupRoutes from './routes/signup.routes.js';

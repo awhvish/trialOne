@@ -6,6 +6,7 @@ import Play from "./components/play.jsx";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import {AuthProvider} from "./components/utils/authContext.jsx";
 import checkTokenExpiration from "./components/utils/checkTokenExpiration.jsx";
+import axios from "axios";
 
 function App() {
   checkTokenExpiration();

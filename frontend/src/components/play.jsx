@@ -12,7 +12,7 @@ function Play() {
                 return;
             }
             try {
-                const response = await fetch('http://13.49.21.122:4200/api/v1/play', {
+                const response = await fetch('/api/v1/play', {
                     method: 'POST',
                     headers: {
                         'Authorization': 'Bearer ' + token,
