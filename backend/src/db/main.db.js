@@ -7,7 +7,7 @@ async function connectDB() {
     catch(err){
         console.log(`MongoDB connection error: ${err}`);
     }
-    console.log('Connected to MongoDB', mongoose.connection.name);
+    console.log('Connected to MongoDB:', mongoose.connection.db.databaseName);
 
 }
 
