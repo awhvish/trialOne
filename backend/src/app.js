@@ -16,5 +16,8 @@ app.use('/api/v1/signup',signupRoutes);
 app.use('/api/v1/login',loginRoutes);
 app.use('/api/v1/play',playRoutes);
 
+app.get('/',(req,res)=>{
+    res.send('Welcome to the server');
+});
 
 export default app;
