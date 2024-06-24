@@ -33,7 +33,7 @@ function Signup() {
       return;
     }
     try {
-      const response = await axios.post("/api/v1/signup", formData);
+      const response = await axios.post("http://13.49.21.122:4200/api/v1/signup", formData);
       console.log("Server response:", response.data);
       setCaution((`User created! Login to continue`));
     } catch (error) {
