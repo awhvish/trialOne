@@ -45,7 +45,10 @@ function Signup() {
       setCaution((`User created! Login to continue`));
     } catch (error) {
       console.error("Error posting data to server:", error.response.data.error);
-      setCaution(`User created! Login to continue.`);    }
+      if (error.response.data.error === "User already exists") {
+        setCaution("Username or email already exists");    
+        }
+      }
   }
 
   function handleChange(e) {
