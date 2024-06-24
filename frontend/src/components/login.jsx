@@ -27,7 +27,7 @@ function Login() {
     e.preventDefault();
     console.log(formData);
     try {
-      const response = await axios.post("http://13.49.21.122:4200/api/v1/login", formData,
+      const response = await axios.post("/api/v1/login", formData,
         {
           headers: {
             'Content-Type': 'application/json',
