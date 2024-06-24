@@ -1,49 +1,84 @@
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #333;
-    color: white;
-    padding: 0.5rem 1rem; /* Existing padding */
-    position: fixed; /* Fix navbar to the top of the page */
-    top: 0; /* Align to the top */
-    left: 0; /* Align to the left */
-    right: 0px; /* Add space on the right */
-    width: auto; /* Adjust width to auto to work with left and right properties */
-    z-index: 1000; /* Ensure it stays on top of other content */
+body, ul {
+  margin: 0;
+  padding: 0;
 }
-  .navbar-logo {
-    font-size: 1.5rem;
-    font-weight: bold;
-  }
-  
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #333;
+  color: white;
+  padding: 0.5rem 1rem ;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0px;
+  width: auto;
+  z-index: 1000;
+}
+
+.navbar-logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+  margin-right: 15px;
+}
+
+.nav-links li {
+  padding: 0 1rem;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: white;
+  transition: color 0.3s ease-in-out;
+}
+
+.nav-links a:hover {
+  color: grey;
+}
+
+.mobile-menu-icon {
+  cursor: pointer;
+}
+
+/* Responsive Navbar */
+@media (max-width: 768px) {
   .nav-links {
-    list-style: none;
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 4rem;
+    background-color: #333;
+    width: 100%;
+    left: 0;
+    z-index: 999;
+    margin-top: 0; 
+  }
+
+  .nav-links.active {
     display: flex;
   }
-  
+
   .nav-links li {
-    padding: 0 1rem;
+    padding: 1rem;
+    text-align: center;
   }
-  
-  .nav-links a {
-    text-decoration: none;
-    color: white;
-    transition: color 0.3s ease-in-out;
-  }
-
-  .nav-links a:hover {
-    color: grey;
-  }
-
-  /* Responsive Navbar */
-  @media (max-width: 768px) {
-    .nav-links {
-      display: none; /* Hide navbar items on smaller screens */
-    }
-  
-    .navbar-logo {
-      flex-grow: 1; /* Center logo on smaller screens */
-    }
-  }
-
+}

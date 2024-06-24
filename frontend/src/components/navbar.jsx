@@ -1,9 +1,9 @@
-import { useState, useEffect } from "react";
-import React from "react";
-import "./css/Navbar.css";
+import React, { useState, useEffect } from "react";
+import "./css/Navbar.css"; // Import the unified CSS file
 
 function Navbar() {
   const [checkLogin, setCheckLogin] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
@@ -18,35 +18,47 @@ function Navbar() {
     localStorage.removeItem("token");
     setCheckLogin(false);
   }
+
+  function toggleMobileMenu() {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  }
+
   return (
     <nav className="navbar">
-      <div className="navbar-logo">trialOne</div>
-      <ul className="nav-links">
-        <li>
-          <a href="/">Home</a>
-        </li>
-        {!checkLogin && (
-          <li>
-            <a href="/login">Login</a>
-          </li>
-        )}
+      <div className="navbar-left">
+        <div className="navbar-logo">trialOne</div>
+      </div>
+      <div className="navbar-right">
 
-        {!checkLogin && (
+        <ul className={`nav-links ${isMobileMenuOpen ? "active" : ""}`}>
           <li>
-            <a href="/signup">Signup</a>
+            <a href="/">Home</a>
           </li>
-        )}
-        <li>
-          <a href="/play">Play</a>
-        </li>
-        {checkLogin && (
-          <li >
-            <a href="/" onClick={handleSignout} className="signout">
-              Signout
-            </a>
+          {!checkLogin && (
+            <li>
+              <a href="/login">Login</a>
+            </li>
+          )}
+          {!checkLogin && (
+            <li>
+              <a href="/signup">Signup</a>
+            </li>
+          )}
+          <li>
+            <a href="/play">Play</a>
           </li>
-        )}
-      </ul>
+          {checkLogin && (
+            <li>
+              <a href="/" onClick={handleSignout} className="signout">
+                Signout
+              </a>
+            </li>
+          )}
+        </ul>
+        <div className="mobile-menu-icon" onClick={toggleMobileMenu}>
+          ☰
+        </div>
+      </div>
     </nav>
   );
 }
