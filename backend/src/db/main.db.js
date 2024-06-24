@@ -1,9 +1,8 @@
 import mongoose from "mongoose";
-import User from "../models/user.models.js";
 
 async function connectDB() {
     try{
-        await mongoose.connect('mongodb://127.0.0.1:27017/userdb');
+        await mongoose.connect(process.env.MONGODB);
     }
     catch(err){
         console.log(`MongoDB connection error: ${err}`);
